@@ -38,4 +38,6 @@ int main(){
   cout << "Kopya sayisi : " << Kisi::nesneSayisi << endl;
 
   return 0;
+
+  //private
 }
