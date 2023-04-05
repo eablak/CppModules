@@ -1,28 +1,71 @@
+#include "Contact.hpp"
 #include <iostream>
 
-class Contact
+Contact::Contact()
 {
-  public: //private // hiçbir şey yazmamak private demek
-	std::string NAME;
-	std::string SURNAME;
-	std::string NICKNAME;
-	std::string NUMBER;
-	std::string DARKEST_SECRET;
-};
+	return ;
+}
 
-int	main(void)
+Contact::~Contact()
 {
-	Contact p1;
-	p1.NAME = "esra";
-	p1.SURNAME = "ablak";
-	p1.NICKNAME = "eablak";
-	p1.NUMBER = "777";
-	p1.DARKEST_SECRET = "WBS";
+	return ;
+}
 
-	std::cout << "p1.adi: " << p1.NAME << std::endl;
-	std::cout << "p1.soyadi: " << p1.SURNAME << std::endl;
-	std::cout << "p1.nick: " << p1.NICKNAME << std::endl;
-	std::cout << "p1.numb: " << p1.NUMBER << std::endl;
-	std::cout << "p1.secret: " << p1.DARKEST_SECRET << std::endl;
-	return (0);
+std::string Contact::get_firstname()
+{
+	return (this->first_name);
+}
+
+std::string Contact::get_lastname()
+{
+	return (this->last_name);
+}
+
+std::string Contact::get_nickname()
+{
+	return (this->nick_name);
+}
+
+std::string Contact::get_phonenumber()
+{
+	return (this->phone_number);
+}
+
+std::string Contact::get_secret()
+{
+	return (this->darkest_secret);
+}
+
+void Contact::set_firstname(std::string first_name)
+{
+	this->first_name = first_name;
+}
+
+void Contact::set_lastname(std::string last_name)
+{
+	this->last_name = last_name;
+}
+
+void Contact::set_nickname(std::string nick_name)
+{
+	this->nick_name = nick_name;
+}
+
+void Contact::set_phonenumber(std::string phone_number)
+{
+	this->phone_number = phone_number;
+}
+
+void Contact::set_secret(std::string darkest_secret)
+{
+	this->darkest_secret = darkest_secret;
+}
+
+void Contact::print_contact()
+{
+	std::cout << "First Name: " << this->get_firstname() << std::endl;
+	std::cout << "Last Name: " << this->get_lastname() << std::endl;
+	std::cout << "Phone number : " << this->get_phonenumber() << std::endl;
+	std::cout << "Nickname : " << this->get_nickname() << std::endl;
+	std::cout << "Secret : " << this->get_secret() << std::endl;
 }
