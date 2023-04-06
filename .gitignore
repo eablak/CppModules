@@ -1,1 +1,3 @@
 *.o
+phonebook
+.DS_Store
