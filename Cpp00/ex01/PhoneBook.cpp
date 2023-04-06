@@ -59,7 +59,7 @@ void PhoneBook::search_contact()
 	std::cout << "│" << std::setw(10) << std::right << "nickname"
 				<< "│" << std::endl;
 	std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
-	for (int i = 0; i < this->index; i++)
+	for (int i = 0; (i < this->index && i < 8); i++)
 	{
 		std::cout << "|" << std::setw(10) << i;
 		std::cout << "|" << std::setw(10) << truncate(this->contacts[i].get_firstname());
@@ -80,7 +80,6 @@ void PhoneBook::search_contact()
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
 								'\n');
-				//search + -> add hatası
 				std::cout << "Invalid input" << std::endl;
 			}
 			else
