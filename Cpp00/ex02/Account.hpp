@@ -30,12 +30,12 @@ public:
 	static void	displayAccountsInfos( void );
 
 	Account( int initial_deposit );
-	// ~Account( void );
+	~Account( void );
 
-	// void	makeDeposit( int deposit );
-	// bool	makeWithdrawal( int withdrawal );
+	void	makeDeposit( int deposit );
+	bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
-	// void	displayStatus( void ) const;
+	void	displayStatus( void ) const;
 
 
 private:
