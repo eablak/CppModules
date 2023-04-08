@@ -30,29 +30,29 @@ public:
 	static void	displayAccountsInfos( void );
 
 	Account( int initial_deposit );
-	~Account( void );
+	// ~Account( void );
 
-	void	makeDeposit( int deposit );
-	bool	makeWithdrawal( int withdrawal );
+	// void	makeDeposit( int deposit );
+	// bool	makeWithdrawal( int withdrawal );
 	int		checkAmount( void ) const;
-	void	displayStatus( void ) const;
+	// void	displayStatus( void ) const;
 
 
 private:
 
-	static int	_nbAccounts;
+	static int	_nbAccounts; //index;
 	static int	_totalAmount;
 	static int	_totalNbDeposits;
 	static int	_totalNbWithdrawals;
 
-	static void	_displayTimestamp( void );
+	// static void	_displayTimestamp( void );
 
-	int				_accountIndex;
-	int				_amount;
+	int				_accountIndex; //_nbAccounts
+	int				_amount; //initial_deposit
 	int				_nbDeposits;
 	int				_nbWithdrawals;
 
-	Account( void );
+	// Account( void );
 
 };
 
