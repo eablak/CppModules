@@ -5,15 +5,15 @@ SOURCES = main.cpp Contact.cpp PhoneBook.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
 $(NAME) : $(OBJECTS) 
-	$(CC) $(FLAGS) -o $(NAME) $(OBJECTS)
+	$(CC) $(CPPFLAGS) -o $(NAME) $(OBJECTS)
 
 .c.o:
-	${CC} ${FLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CPPFLAGS} -c $< -o ${<:.c=.o}
 
 clean:
 	rm -f *.o
