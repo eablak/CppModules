@@ -1,6 +1,5 @@
 #include "Account.hpp"
 #include <iomanip>
-// #include <ctime>
 #include <iostream>
 
 int Account::_nbAccounts = 0;
@@ -10,7 +9,7 @@ int Account::_totalNbWithdrawals = 0;
 
 int Account::getNbAccounts()
 {
-	return (_nbAccounts); // this ?
+	return (_nbAccounts); 
 }
 
 int Account::getTotalAmount()
@@ -28,12 +27,7 @@ int Account::getNbWithdrawals()
 	return (_totalNbWithdrawals);
 }
 
-int Account::checkAmount() const /*
-Burada, checkAmount() fonksiyonunun const olarak işaretlenmesi,
-	fonksiyonun sınıfın durumunu değiştirmeyeceği ve nesnenin veri üyelerini değiştirmeyeceği anlamına gelir. Yani,
-	checkAmount() fonksiyonu nesne durumunu okumaya yönelik bir işlem yapacak,
-	ancak nesneyi değiştirmeyecek. Bu,
-	fonksiyonun const-correctness prensibine uygun olarak tanımlandığını gösterir.*/
+int Account::checkAmount() const
 {
 	return (this->_amount);
 }

@@ -48,7 +48,6 @@ std::string truncate(std::string str)
 		return (str.substr(0, 9) + ".");
 	return (str);
 }
-// void Contact:: ?
 
 void PhoneBook::search_contact()
 {
@@ -75,7 +74,7 @@ void PhoneBook::search_contact()
 		{
 			std::cout << "Enter an index: ";
 			std::cin >> number;
-			if (number > this->index || number > 7 || index < 0)
+			if (number >= this->index || number > 7 || index < 0)
 			{
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(),
