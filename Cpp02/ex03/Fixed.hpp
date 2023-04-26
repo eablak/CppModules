@@ -9,7 +9,7 @@ class Fixed
     
     public:
     Fixed();
-    Fixed(const int value);
+    Fixed(int value);
     Fixed(const float value);
     Fixed(const Fixed &copyFixed);
     Fixed &operator = (const Fixed &copyFixed);
@@ -19,17 +19,17 @@ class Fixed
     float toFloat( void ) const;
     int toInt( void ) const;
 
-    bool operator>(const Fixed &r);
-    bool operator<(const Fixed &r);
-    bool operator>=(const Fixed &r);
-    bool operator<=(const Fixed &r);
-    bool operator==(const Fixed &r);
-    bool operator!=(const Fixed &r);
+    bool operator>(const Fixed &r) const;
+    bool operator<(const Fixed &r) const;
+    bool operator>=(const Fixed &r) const;
+    bool operator<=(const Fixed &r) const;
+    bool operator==(const Fixed &r) const;
+    bool operator!=(const Fixed &r) const;
 
-    Fixed operator*(const Fixed &r);
-    Fixed operator/(const Fixed &r);
-    Fixed operator-(const Fixed &r);
-    Fixed operator+(const Fixed &r);
+    float operator*(const Fixed &r);
+    float operator/(Fixed &r);
+    float operator-(Fixed &r);
+    float operator+(const Fixed &r);
 
     Fixed &operator++();
     Fixed &operator--();

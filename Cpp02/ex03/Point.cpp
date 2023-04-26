@@ -11,7 +11,6 @@ Point::Point(const float x,const float y):x(x),y(y)
 
 Point::Point(const Point &r):x(r.x),y(r.y)
 {
-    // *this = r; //bu olmuyo!!!!!
 }
 
 Point &Point::operator=(const Point &copyPoint)

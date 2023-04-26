@@ -9,7 +9,7 @@ class Fixed
     
     public:
     Fixed();
-    Fixed(const int value);
+    Fixed(int value);
     Fixed(const float value);
     Fixed(const Fixed &copyFixed);
     Fixed &operator = (const Fixed &copyFixed);
@@ -23,5 +23,3 @@ class Fixed
 std::ostream &operator << (std::ostream &output, const Fixed &fixed);
 
 #endif
-
-//istream sınıfı giriş için, ostream ise çıkış için  kullanılır .

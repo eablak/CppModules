@@ -7,7 +7,7 @@ Fixed::Fixed()
     this->fixedPoint = 0;
 }
 
-Fixed::Fixed(const int value)
+Fixed::Fixed(int value)
 {
     this->fixedPoint = value << mantissa;
 }
@@ -19,12 +19,12 @@ Fixed::Fixed(const float value)
 
 Fixed::Fixed(const Fixed &copyFixed)
 {
-    Fixed::operator=(copyFixed);
+    *this = copyFixed;
 }
 
 Fixed &Fixed::operator=(const Fixed &copyFixed)
 {
-    this->fixedPoint = copyFixed.getRawBits();
+    this->fixedPoint = copyFixed.fixedPoint;
     return (*this);
 }
 
@@ -44,7 +44,7 @@ void Fixed::setRawBits(int const raw)
 
 float Fixed::toFloat(void) const
 {
-    return float(this->fixedPoint) / (1 << mantissa);
+    return ((float)this->fixedPoint / (float)(1 << mantissa));
 }
 
 int Fixed::toInt(void) const
@@ -58,63 +58,57 @@ std::ostream &operator<<(std::ostream &output, const Fixed &fixed)
     return (output);
 }
 
-bool Fixed::operator>(const Fixed &r)
+bool Fixed::operator>(const Fixed &r) const
 {
     return (this->fixedPoint > r.fixedPoint);
 }
 
 
-bool Fixed::operator<(const Fixed &r)
+bool Fixed::operator<(const Fixed &r) const
 {
     return (this->fixedPoint < r.fixedPoint);
 }
 
-bool Fixed::operator>=(const Fixed &r)
+bool Fixed::operator>=(const Fixed &r) const
 {
     return (this->fixedPoint >= r.fixedPoint);
 }
 
-bool Fixed::operator<=(const Fixed &r)
+bool Fixed::operator<=(const Fixed &r) const
 {
     return (this->fixedPoint <= r.fixedPoint);
 }
 
-bool Fixed::operator==(const Fixed &r)
+bool Fixed::operator==(const Fixed &r) const
 {
     return (this->fixedPoint == r.fixedPoint);
 }
 
-bool Fixed::operator!=(const Fixed &r)
+bool Fixed::operator!=(const Fixed &r) const
 {
     return (this->fixedPoint != r.fixedPoint);
 }
 
-Fixed Fixed::operator*(const Fixed &r)
+float Fixed::operator*(const Fixed &r)
 {
-    Fixed ret;
-    ret.setRawBits(this->fixedPoint * r.fixedPoint >> mantissa);
-    return (ret);
+    return (this->toFloat() * r.toFloat());
 }
 
-Fixed Fixed::operator/(const Fixed &r)
+float Fixed::operator/(Fixed &r)
 {
-    Fixed ret;
-    ret.setRawBits(this->fixedPoint * (1 << mantissa) / r.fixedPoint);
-    return (ret);
+    return (this->toFloat() * r.toFloat());
 }
 
-Fixed Fixed::operator-(const Fixed &r)
+float Fixed::operator-(Fixed &r)
 {
-    Fixed ret;
-    ret.setRawBits(this->fixedPoint - r.fixedPoint);
-    return (ret);
+    return (this->toFloat() - r.toFloat());
+
 }
 
-Fixed Fixed::operator+(const Fixed &r)
+float Fixed::operator+(const Fixed &r)
 {
-    Fixed ret;
-    ret.setRawBits(this->fixedPoint + r.fixedPoint);
-    return (ret);
+    return (this->toFloat() + r.toFloat());
+
 }
 
 Fixed &Fixed::operator++()

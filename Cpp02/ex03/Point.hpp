@@ -16,10 +16,6 @@ class Point
     ~Point();
 
     Fixed const getX(void) const;
-    /*ikinci const olmazsa 
-    bx = b.getX().toFloat();
-    hata veriyo
-    */
     Fixed const getY(void) const;
 };
 
