@@ -96,7 +96,7 @@ float Fixed::operator*(const Fixed &r)
 
 float Fixed::operator/(Fixed &r)
 {
-    return (this->toFloat() * r.toFloat());
+    return (this->toFloat() / r.toFloat());
 }
 
 float Fixed::operator-(Fixed &r)
