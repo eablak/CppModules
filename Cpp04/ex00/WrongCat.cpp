@@ -15,6 +15,8 @@ WrongCat::WrongCat(const WrongCat &r)
 WrongCat &WrongCat::operator=(const WrongCat &r)
 {
     std::cout << "WrongCat copy assignment constructor called" << std::endl;
+    if (this == &r)
+        return *this;
     *this = r;
     return (*this);
 }

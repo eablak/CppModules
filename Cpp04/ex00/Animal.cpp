@@ -13,7 +13,7 @@ Animal::Animal(const Animal &r)
 
 Animal &Animal::operator=(const Animal &r)
 {
-    std::cout << "Animal copy assignment constructor called" << std::endl;
+    std::cout << "Animal copy assignment called" << std::endl;
     this->type = r.type;
     return (*this);
 }

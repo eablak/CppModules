@@ -14,10 +14,7 @@ class Animal
     virtual ~Animal();
 
     std::string getType() const;
-    //mainde animal sınıfı const oluşturuluyo
     virtual void makeSound() const;
-    //ezilecek fonk olduğu için virtual
-    //virtualsız da çalışıyor ama ezilmez
 };
 
 #endif

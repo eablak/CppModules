@@ -21,6 +21,4 @@ int main()
         delete animals[i];
     }
     return 0;
-    // cat - dog 
-    //leak kontrol et
 }

@@ -15,6 +15,8 @@ Cat::Cat(const Cat &r)
 Cat &Cat::operator=(const Cat &r)
 {
     std::cout << "Cat copy assignment constructor called" << std::endl;
+    if(this  == &r)
+        return *this;
     *this = r;
     return (*this);
 }

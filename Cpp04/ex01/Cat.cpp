@@ -15,7 +15,7 @@ Cat::Cat(const Cat &r)
 
 Cat &Cat::operator=(const Cat &r)
 {
-    std::cout << "Cat copy assignment constructor called" << std::endl;
+    std::cout << "Cat copy assignment called" << std::endl;
     this->type = r.type;
     this->brain = new Brain();
     this->brain = r.brain;
