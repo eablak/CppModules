@@ -36,12 +36,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &r)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap destructor called -> " << this->name << std::endl;
+    std::cout << "ScavTrap destructor called" << std::endl;
 }
 
 void ScavTrap::attack(const std::string &target)
 {
-    if (this->energy_points < 0)
+    if (this->energy_points <= 0 || this->hit_points <= 0)
     {
         std::cout << "No energy" << std::endl;
         return ;

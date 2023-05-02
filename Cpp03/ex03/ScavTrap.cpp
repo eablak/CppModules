@@ -18,7 +18,7 @@ ScavTrap::ScavTrap(std::string name):ClapTrap(name)
     this->attack_damage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &r):ClapTrap()
+ScavTrap::ScavTrap(const ScavTrap &r):ClapTrap("DefaultClap")
 {
     std::cout << "ScavTrap copy constructor called" << std::endl;
     this->name = r.name;
@@ -36,12 +36,12 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &r)
 
 ScavTrap::~ScavTrap()
 {
-    std::cout << "ScavTrap destructor called -> " << this->name << std::endl;
+    std::cout << "ScavTrap destructor called" << std::endl;
 }
 
 void ScavTrap::attack(const std::string &target)
 {
-    if (this->energy_points < 0)
+    if (this->energy_points <= 0 || this->hit_points <= 0)
     {
         std::cout << "No energy" << std::endl;
         return ;
