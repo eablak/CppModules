@@ -10,11 +10,10 @@ int main()
 {
     const Animal* j = new Dog();
     const Animal* i = new Cat();
-    delete j;//should not create a leak
+    delete j;
     delete i;
     
     const Animal *animals[4] = {new Cat(), new Dog(), new Cat(), new Dog()};
-    //taban sınıftan türetiyorum
     for(int i = 0;i< 4;i++)
     {
         animals[i]->makeSound();

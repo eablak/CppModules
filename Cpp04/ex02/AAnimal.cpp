@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 
 Animal::Animal()
 {
@@ -30,4 +30,5 @@ std::string Animal::getType() const
 
 void Animal::makeSound() const
 {
+    std::cout << "Animal sound" << std::endl;
 }

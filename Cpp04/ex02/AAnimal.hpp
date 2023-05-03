@@ -15,7 +15,6 @@ class Animal
 
     std::string getType() const;
     virtual void makeSound() const = 0;
-    //virtual diyip = 0 diyebiliyosun => abstract (pure method)
 };
 
 #endif
