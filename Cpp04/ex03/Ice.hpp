@@ -5,8 +5,8 @@ class Ice : public AMateria
 {
     public:
     Ice();
-    // Ice(const Ice &copy);
-    // Ice &operator=(const Ice &copy);
+    Ice(const Ice &copy);
+    Ice &operator=(const Ice &copy);
     ~Ice();
 
     virtual AMateria* clone() const;
