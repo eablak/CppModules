@@ -8,11 +8,11 @@ MateriaSource::MateriaSource()
     
 }
 
-MateriaSource::MateriaSource(const MateriaSource &r)
+MateriaSource::MateriaSource( MateriaSource &r)
 {
     for(int i=0;i < 4;i++)
     {
-        if (!r.inventory[i])
+        if (r.inventory[i] != NULL)
             this->inventory[i] = r.inventory[i]->clone();
         else
             this->inventory[i] = NULL;
@@ -40,25 +40,28 @@ MateriaSource::~MateriaSource()
 
 void MateriaSource::learnMateria(AMateria *m)
 {
-    if (!m)
-    {
-        for(int i = 0;i<4;i++)
-        {
-            if (this->inventory[i] == NULL)
-            {
-                this->inventory[i] = m;
-                break;;
-            }
-        }    
-    }
+  	int i = 0;
+	while(this->inventory[i] != NULL && i < 4)
+		i++;
+	if (i >= 4)
+	{
+		std::cout << "Can't learn more than 4 Materia";
+		return ;
+	}
+	if(this->inventory[i] == NULL)
+		this->inventory[i] = m;
+	std::cout << "Materia "<< m->getType() <<" is Learned ! "<< std::endl;
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
-    for(int i = 0;i<4;i++)
-    {
-        if (this->inventory[i] != NULL && this->inventory[i]->getType() == type)
-            return (this->inventory[i]->clone());
-    }
-    return (NULL);
+   	int i = 0;
+	while(i < 4 && this->inventory[i] != NULL &&  this->inventory[i]->getType() != type)
+		i++;
+	if (i >= 4 || !(this->inventory)[i])
+	{
+		std::cout << type << " materia does not exit\n";
+		return (NULL);
+	}
+	return this->inventory[i]->clone();
 }

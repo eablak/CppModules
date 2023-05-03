@@ -1,5 +1,9 @@
 #include "Character.hpp"
 
+Character::Character() {
+	std::cout << "Character Created !" << std::endl;
+}
+
 Character::Character(std::string name):name(name) {
 	for (int i = 0; 4 > i; ++i) {
 		this->inventory[i] = NULL;
@@ -7,23 +11,11 @@ Character::Character(std::string name):name(name) {
 	std::cout << "Character " << name << " is Created !" << std::endl;
 }
 
-Character::Character() {
-	std::cout << "Character Created !" << std::endl;
-}
-
 Character::Character(Character &copy):name(copy.getName()) {
 	for (int i = 0; i < 4; ++i) {
 		this->inventory[i] = copy.inventory[i];
 	}
 	std::cout << "Character Copied !" << std::endl;
-}
-
-Character::~Character() {
-	for (int i = 0; i < 4; ++i) {
-	if(this->inventory[i] != NULL)
-			delete this->inventory[i];
-	}
-	std::cout << "Character Destructed !" << std::endl;
 }
 
 Character &Character::operator=(const Character &c) {
@@ -34,14 +26,23 @@ Character &Character::operator=(const Character &c) {
 	}
 	return *this;
 }
-std::string const &Character::getName()const
+
+Character::~Character() {
+	for (int i = 0; i < 4; ++i) {
+	if(this->inventory[i] != NULL)
+			delete this->inventory[i];
+	}
+	std::cout << "Character Destructed !" << std::endl;
+}
+
+const std::string &Character::getName()const
 {
     return (this->name);
 }
 
 void Character::equip(AMateria *m)
 {
-    if(!m)
+    if(m != NULL)
     {
         for(int i = 0;i < 4;i++)
         {

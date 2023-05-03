@@ -15,7 +15,7 @@ AMateria::~AMateria()
 	std::cout << "AMateria destructed called" << std::endl;
 }
 
-AMateria::AMateria(std::string const & type):type(type)
+AMateria::AMateria(const std::string & type):type(type)
 {
     std::cout << "Abstract materia is created" << std::endl;
 }

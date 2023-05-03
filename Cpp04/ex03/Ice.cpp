@@ -5,25 +5,25 @@ Ice::Ice():AMateria("ice")
     std::cout << "Ice constructor called" << std::endl;
 }
 
-Ice::Ice(const Ice &r):AMateria(r)
-{
-    std::cout << "Ice copy called" << std::endl;
-    *this = r;
-}
+// Ice::Ice(const Ice &r):AMateria(r)
+// {
+//     std::cout << "Ice copy called" << std::endl;
+//     *this = r;
+// }
 
-Ice &Ice::operator=(const Ice &r)
-{
-    std::cout << "Ice operator called" << std::endl;
-    this->AMateria::operator=(r);
-    return (*this);
-}
+// Ice &Ice::operator=(const Ice &r)
+// {
+//     std::cout << "Ice operator called" << std::endl;
+//     this->AMateria::operator=(r);
+//     return (*this);
+// }
 
 Ice::~Ice()
 {
     std::cout << "Destructor called" << std::endl;
 }
 
-Ice *Ice::clone()const
+AMateria *Ice::clone()const
 {
     return (new Ice());
 }

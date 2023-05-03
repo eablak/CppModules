@@ -9,7 +9,7 @@ class MateriaSource:public IMateriaSource
 
     public:
     MateriaSource();
-	MateriaSource(const MateriaSource& copy);
+	MateriaSource( MateriaSource& copy);
 	MateriaSource& operator=(const MateriaSource& copy);
 	~MateriaSource(void);
 
