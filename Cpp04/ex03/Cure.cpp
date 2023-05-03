@@ -23,7 +23,7 @@ Cure::~Cure()
     std::cout << "Destructor called" << std::endl;
 }
 
-AMateria *AMateria::clone()const
+Cure *Cure::clone()const
 {
     return (new Cure());
 }

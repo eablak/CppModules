@@ -66,6 +66,6 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter &target)
 {
-    if (idx <= 3 && idx >= 0)
+    if ((idx <= 3 && idx >= 0)&& this->inventory[idx])
         this->inventory[idx]->use(target);
 }

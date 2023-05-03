@@ -23,7 +23,7 @@ Ice::~Ice()
     std::cout << "Destructor called" << std::endl;
 }
 
-AMateria *AMateria::clone()const
+Ice *Ice::clone()const
 {
     return (new Ice());
 }

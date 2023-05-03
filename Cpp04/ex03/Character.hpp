@@ -10,8 +10,8 @@ class Character: public ICharacter
 
     public:
     Character();
-    Character(const std::string& name);
-    Character(const Character &copy);
+    Character(std::string name);
+    Character(Character &copy);
     Character &operator=(const Character &copy);
     ~Character();
 

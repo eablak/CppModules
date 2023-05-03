@@ -2,12 +2,22 @@
 
 AMateria::AMateria()
 {
+	std::cout << "AMateria Created" << std::endl;
 }
 
-AMateria::AMateria(std::string const & type)
+AMateria::AMateria(const AMateria &r)
 {
-    std::cout << "AMateria is created" << std::endl;
-    this->type = type;
+    *this = r;
+}
+
+AMateria::~AMateria()
+{
+	std::cout << "AMateria destructed called" << std::endl;
+}
+
+AMateria::AMateria(std::string const & type):type(type)
+{
+    std::cout << "Abstract materia is created" << std::endl;
 }
 
 std::string const &AMateria::getType() const
