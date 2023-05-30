@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-//Makefile -std=c+98
+//zsh iot check
 int main()
 {
     Bureaucrat bureaucrat("esra",10);
@@ -13,4 +13,7 @@ int main()
     b2.decrementGrade();
     std::cout << b2.getGrade() << std::endl;
     std::cout << b2;
+
+
+    Bureaucrat b_ex("dsf",0);
 }
