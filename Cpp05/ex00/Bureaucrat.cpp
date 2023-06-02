@@ -8,12 +8,13 @@ Bureaucrat::Bureaucrat(std::string name,int grade): name(name),grade(grade)
         throw GradeTooHighException();
 }
 
-Bureaucrat::Bureaucrat(){ return ;}
-Bureaucrat::Bureaucrat(const Bureaucrat &copyB): name(copyB.getName()), grade(copyB.grade){}
+Bureaucrat::Bureaucrat(){ std::cout << "created" << std::endl; return ;}
+Bureaucrat::Bureaucrat(const Bureaucrat &copyB): name(copyB.getName()), grade(copyB.grade)
+{std::cout << "Bureaucrat is copied from " << copyB.getName() << std::endl;}
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copyB){
   this->grade = copyB.grade; 
   return (*this);  }
-Bureaucrat::~Bureaucrat(){}
+Bureaucrat::~Bureaucrat(){std::cout << "destructed" << std::endl;}
 
 const std::string &Bureaucrat::getName() const
 {

@@ -2,6 +2,7 @@
 //zsh iot check
 int main()
 {
+    Bureaucrat e;
     Bureaucrat bureaucrat("esra",10);
     std::cout << bureaucrat.getName() << std::endl;
     std::cout << bureaucrat << std::endl;

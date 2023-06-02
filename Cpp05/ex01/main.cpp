@@ -2,18 +2,24 @@
 //zsh iot check
 int main()
 {
-    Bureaucrat bureaucrat("esra",10);
-    std::cout << bureaucrat.getName() << std::endl;
-    std::cout << bureaucrat << std::endl;
-    Bureaucrat b("toomuch",1);
-    // b.incrementGrade();
-    Bureaucrat b2("b",45);
-    b2.incrementGrade();
-    b2.decrementGrade();
-    b2.decrementGrade();
-    std::cout << b2.getGrade() << std::endl;
-    std::cout << b2;
+    Bureaucrat b("b1",42);
+    Form f("form",10,120);
 
+    std::cout << f.getName() << std::endl;
+    std::cout << f.get_sign_grade() << std::endl;
+    std::cout << f.get_execute_grade() << std::endl;
+    std::cout << f.get_is_signed() << std::endl;
 
-    Bureaucrat b_ex("dsf",0);
+    f.beSigned(b);
+    std::cout << f.get_is_signed() << std::endl;
+
+    b.signForm(f);
+
+    f.set_sign(0);
+    std::cout << f.get_is_signed() << std::endl;
+
+    b.signForm(f);
+
+    Form f2("ff",100,120);
+    b.signForm(f2);
 }

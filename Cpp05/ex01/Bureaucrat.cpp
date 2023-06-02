@@ -8,12 +8,13 @@ Bureaucrat::Bureaucrat(std::string name,int grade): name(name),grade(grade)
         throw GradeTooHighException();
 }
 
-Bureaucrat::Bureaucrat(){ return ;}
-Bureaucrat::Bureaucrat(const Bureaucrat &copyB): name(copyB.getName()), grade(copyB.grade){}
+Bureaucrat::Bureaucrat(){ std::cout << "created" << std::endl; return ;}
+Bureaucrat::Bureaucrat(const Bureaucrat &copyB): name(copyB.getName()), grade(copyB.grade)
+{std::cout << "Bureaucrat is copied from " << copyB.getName() << std::endl;}
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &copyB){
   this->grade = copyB.grade; 
   return (*this);  }
-Bureaucrat::~Bureaucrat(){}
+Bureaucrat::~Bureaucrat(){std::cout << "destructed" << std::endl;}
 
 const std::string &Bureaucrat::getName() const
 {
@@ -43,4 +44,25 @@ std::ostream &operator<<(std::ostream &out, Bureaucrat &str)
 {
     return out << "Bureaucrat name: " << str.getName() 
     << ", grade: " << str.getGrade() << std::endl;
+}
+
+void Bureaucrat::signForm(Form &form)
+{
+    if (form.get_is_signed() == true)
+    {
+        std::cout << this->getName() << " couldn't sign " << form.getName() 
+            << " beacuse is already signed" << std::endl;
+        return;
+    }
+    try
+    {
+        form.beSigned(*this);
+    }
+    catch(Form::GradeTooLowException &exception)
+    {
+        std::cout << this->getName() << " couldn't sign " << form.getName() 
+            << " beacuse it's too low" << std::endl;
+        return;
+    }
+    std::cout << this->getName() << " signed " << form.getName() << std::endl;
 }
