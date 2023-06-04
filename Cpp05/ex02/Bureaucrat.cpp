@@ -21,7 +21,7 @@ const std::string &Bureaucrat::getName() const
     return this->name;
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
     return this->grade;
 }
@@ -65,4 +65,9 @@ void Bureaucrat::signForm(AForm &form)
         return;
     }
     std::cout << this->getName() << " signed " << form.getName() << std::endl;
+}
+
+void Bureaucrat::executeForm(AForm const &form)
+{
+    
 }

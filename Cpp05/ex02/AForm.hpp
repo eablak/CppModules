@@ -42,6 +42,14 @@ class AForm
         }
     };
 
+    class FormNotSignedException: std::exception
+    {
+        virtual const char* what() const throw()
+        {
+            return "Form Not Signed";
+        }
+    };
+
     void beSigned(Bureaucrat &bureaucrat);
     void set_sign(bool sign);
 

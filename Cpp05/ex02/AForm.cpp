@@ -44,3 +44,11 @@ void AForm::set_sign(bool sign)
 {
     this->is_signed = sign;
 }
+
+void AForm::execute(Bureaucrat const &executor) const
+{
+    if (this->get_is_signed() == false)
+        throw AForm::FormNotSignedException();
+    if (executor.getGrade() > this->get_sign_grade())
+        throw AForm::GradeTooLowException();
+}
