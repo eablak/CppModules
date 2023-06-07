@@ -36,8 +36,9 @@ bool AForm::get_is_signed() const
 void AForm::beSigned(Bureaucrat &b)
 {
     if (b.getGrade() < this->sign_grade)
+        this->is_signed = true;
+    else
         throw GradeTooLowException();
-    this->is_signed = true;
 }
 
 void AForm::set_sign(bool sign)
@@ -49,6 +50,19 @@ void AForm::execute(Bureaucrat const &executor) const
 {
     if (this->get_is_signed() == false)
         throw AForm::FormNotSignedException();
-    if (executor.getGrade() > this->get_sign_grade())
+    else
+        std::cout << executor.getName() << "'s form signed" << std::endl;
+    if (executor.getGrade() > this->get_execute_grade())
         throw AForm::GradeTooLowException();
+    else
+        std::cout << executor.getName() << "'s grade("
+        << executor.getGrade() << ") is enough"<< std::endl;
+}
+
+std::ostream &operator<<(std::ostream &o, AForm &f)
+{
+    return o << "Form name: " << f.getName()
+    << " sign grade " << f.get_sign_grade()
+    << " execute grade" << f.get_execute_grade()
+    << " is signed " << f.get_is_signed() << std::endl;
 }

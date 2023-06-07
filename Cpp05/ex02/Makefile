@@ -1,6 +1,6 @@
 NAME = bureaucrat
 
-SOURCES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SOURCES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
@@ -18,6 +18,7 @@ $(NAME) : $(OBJECTS)
 clean:
 	rm -f *.o
 	rm -f *.exe
+	rm -f *_shrubbery
 
 fclean: clean
 	rm -f $(NAME)

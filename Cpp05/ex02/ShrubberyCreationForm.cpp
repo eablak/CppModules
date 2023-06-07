@@ -23,7 +23,6 @@ const std::string &ShrubberyCreationForm::getTarget() const
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
     this->AForm::execute(executor);
-    // (void) executor;
     std::ofstream ofs((this->getTarget() + "_shrubbery").c_str());
     ofs << "       _-_\n"
 			"    /~~   ~~\\\n"
