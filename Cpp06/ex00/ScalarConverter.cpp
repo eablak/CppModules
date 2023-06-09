@@ -1,50 +1,104 @@
 #include "ScalarConverter.hpp"
 
-void ScalarConverter::findType(const char *str)
+int is_int(ScalarConverter *s)
 {
     char *ptr;
     long ret;
-    int flag = 0;
 
-    ret = strtol(str,&ptr,10);
+    std::string str = s->getString();
+    ret = strtol(&str[0],&ptr,10);
     if (*ptr == '\0')
     {
-        std::cout << "the number " << ret << std::endl;
-        this->type = "int";
-        flag = 1;
-        return ;
+        std::cout << "the int " << ret << std::endl;
+        s->setType(1);
+        return 1;
     }
-    char *neww;
-    double ret_d;
-    ret_d = strtod(str,&neww);
-    if (*neww == '\0')
-    {
-        std::cout << "the double " << ret_d << std::endl;
-        this->type = "double";
-        flag = 1;
-        return ;
-    }
-    char *newf;
+    return (0);
+}
+
+int is_float(ScalarConverter *s)
+{
+    char *ptr;
     float ret_f;
-    ret_f = strtof(str,&newf);
-    if (*newf == 'f' && *(newf+1) == '\0')
+    std::string str = s->getString();
+
+    ret_f = strtof(&str[0],&ptr);
+    if (*ptr == 'f' && *(ptr+1) == '\0')
     {
         std::cout << "the float " << ret_f << std::endl;
-        this->type = "float";
-        flag = 1;
-        return ;
+        s->setType(2);
+        return 1;
     }
+    return (0);
+}
 
-    if (flag == 0)
+int is_double(ScalarConverter *s)
+{
+    char *ptr;
+    double ret_d;
+    std::string str = s->getString();
+
+    ret_d = strtod(&str[0],&ptr);
+    if (*ptr == '\0')
     {
-        std::cout << "geçersiz" << std::endl;
-        exit(1);
+        std::cout << "the double " << ret_d << std::endl;
+        s->setType(3);
+        return 1;
+    }
+    return (0);
+}
+
+int is_char(ScalarConverter *s)
+{
+    std::string str = s->getString();
+
+    if (strlen(&str[0]) == 1)
+    {
+        s->setType(0);
+        return 1;
+    }
+    return 0;
+}
+
+void ScalarConverter::findType(ScalarConverter *s)
+{
+    
+    while(1)
+    {
+        if (is_int(s))
+            break;
+        if (is_float(s))
+            break;
+        if (is_double(s))
+            break;
+        if (is_char(s))
+            break;
+        else
+        {
+            s->setType(4);
+            break;
+        }
     }
 }
 
-std::string &ScalarConverter::getType()
+void ScalarConverter::setType(int enum_nbr)
+{
+    this->type = enum_nbr;
+}
+
+int ScalarConverter::getType()
 {
     return this->type;
+}
+
+void ScalarConverter::setString(std::string str)
+{
+    this->str = str;
+}
+
+const std::string &ScalarConverter::getString() const
+{
+    return this->str;
 }
 
 ScalarConverter::ScalarConverter(){ return ; }

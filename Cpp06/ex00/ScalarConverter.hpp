@@ -2,14 +2,19 @@
 #define SCALARCONVERTER_HPP
 #include <iostream>
 #include <stdlib.h>
+#include <cstring>
 
 class ScalarConverter{
-    std::string type;
-    const std::string str;
+    int type;
+    std::string str;
 
     public:
-    void findType(const char *str);
-    std::string &getType();
+    enum types { _char, _int, _float, _double, _unknown};
+    void setType(int enum_nbr);
+    void findType(ScalarConverter *s);
+    int getType();
+    void setString(std::string str);
+    const std::string &getString() const;
 
     // ScalarConverter(std::string str);
 
