@@ -92,4 +92,9 @@ const std::string &ScalarConverter::getString() const
     return this->str;
 }
 
-ScalarConverter::ScalarConverter(){ return ; }
+ScalarConverter::ScalarConverter(){std::cout << "scalarconverter created"<<std::endl; }
+ScalarConverter::ScalarConverter(const ScalarConverter &copyS): type(copyS.type), str(copyS.str)
+{ std::cout << "scalarconverter copy constructor" << std::endl; }
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &copyS)
+{ this->str = copyS.str; this->type = copyS.type; return (*this); }
+ScalarConverter::~ScalarConverter() {std::cout << "scalarconverter destructor called" << std::endl; }

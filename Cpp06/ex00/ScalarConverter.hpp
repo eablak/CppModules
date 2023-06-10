@@ -19,12 +19,10 @@ class ScalarConverter{
     void setString(std::string str);
     const std::string &getString() const;
 
-    // ScalarConverter(std::string str);
-
     ScalarConverter();
-    // ScalarConverter(const ScalarConverter &copyS);
-    // ScalarConverter &operator=(const ScalarConverter &copyS);
-    // ~ScalarConverter();
+    ScalarConverter(const ScalarConverter &copyS);
+    ScalarConverter &operator=(const ScalarConverter &copyS);
+    ~ScalarConverter();
 };
 
 long int convert_int(ScalarConverter *s);
