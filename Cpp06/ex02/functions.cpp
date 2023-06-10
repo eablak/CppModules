@@ -31,11 +31,26 @@ void identify(Base* p){
         std::cout << "B is the identified type by pointer" << std::endl;
     else if (dynamic_cast<C *>(p))
         std::cout << "C is the identified type by pointer" << std::endl;
-    else
-        std::cout << "Unknown type" << std::endl;
 }
 
 void identify(Base& p){
-   int i = 0;
-   
+    Base x;
+    int flag = 1;
+    try{
+        x = dynamic_cast<A &>(p);
+        std::cout << "A is the identified type by referance" << std::endl;
+        flag = 0;
+    }
+    catch (std::exception &e){
+        try{
+            if (flag){
+                x = dynamic_cast<B &>(p);
+                std::cout << "B is the identified type by referance" << std::endl;
+                flag = 0;
+            }
+        }
+        catch (std::exception &e){
+            std::cout << "C is the identified type by referance" << std::endl;
+        }
+    }
 }
