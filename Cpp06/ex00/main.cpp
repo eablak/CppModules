@@ -5,25 +5,29 @@ void result(ScalarConverter *s, int type)
     float number = atof(&(s->getString())[0]);
     if (type == 0 || ((number < 32 || number >= 127) && type != 0))
         std::cout << "char: Non displayable" << std::endl;
-    else
-    {
-        if (number <= 0 || number > 255 || isnan(number))
+    else {
+        if (number <= 0 || number > 255 || std::isnan(number))
             std::cout << "char: impossible" << std::endl;
         else
-            std::cout << "char: '" << static_cast<char>(number) << "'" << std::endl;
-    }
-    if (number > INT_MAX || number < INT_MIN || isnan(number))
+            std::cout << "char: '" << static_cast<char>(number) << "'" << std::endl; }
+    if (number > INT_MAX || number < INT_MIN || std::isnan(number))
         std::cout << "int: impossible" << std::endl;
     else
         std::cout << "int: " << convert_int(s) << std::endl;
-    std::cout << "float: " << convert_float(s); 
-    if (convert_int(s) == convert_float(s))
-        std::cout << ".0";
-    std::cout << "f" << std::endl;
-    std::cout << "double: " << convert_double(s);
-    if (convert_int(s) == convert_double(s))
-        std::cout << ".0";
-    std::cout << std::endl;
+    if (std::isinf(convert_float(s)))
+        std::cout << "float: inf" << std::endl;
+    else {
+        std::cout << "float: " << convert_float(s); 
+        if (convert_int(s) == convert_float(s))
+            std::cout << ".0";
+        std::cout << "f" << std::endl; }
+    if (std::isfinite(convert_double(s)))
+        std::cout << "double: inf" << std::endl;
+    else {
+        std::cout << "double: " << convert_double(s);
+        if (convert_int(s) == convert_double(s))
+            std::cout << ".0";
+        std::cout << std::endl; }
 }
 
 void _convert(ScalarConverter *s)
