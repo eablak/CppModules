@@ -49,21 +49,18 @@ void _convert(ScalarConverter *s)
     }
 }
 
-void check_unknown(ScalarConverter *s)
-{
-    std::cout << "'" << s->getString() << "' is not convertable!" << std::endl;
-    exit(1);
-}
-
 int main(int ac, char **av)
 {
     if (ac != 2)
         return 1;
 
     ScalarConverter s;
+    ScalarConverter s1;
     s.setString(av[1]);
     s.findType(&s);
-    if (s.getType() == 4)
-        check_unknown(&s);
-    _convert(&s);
+    s1 = s;
+    if (s1.getType() == 4)
+        std::cout << "'" << s1.getString() << "' is not convertable!" << std::endl;
+    else
+        _convert(&s1);
 }
