@@ -1,6 +1,6 @@
 NAME = convert
 
-SOURCES = main.cpp ScalarConverter.cpp
+SOURCES = main.cpp ScalarConverter.cpp convert_utils.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

@@ -3,6 +3,9 @@
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
+#include <limits.h>
+#include <iomanip>
+#include <cmath>
 
 class ScalarConverter{
     int type;
@@ -23,5 +26,9 @@ class ScalarConverter{
     // ScalarConverter &operator=(const ScalarConverter &copyS);
     // ~ScalarConverter();
 };
+
+long int convert_int(ScalarConverter *s);
+float convert_float(ScalarConverter *s);
+double convert_double(ScalarConverter *s);
 
 #endif

@@ -1,18 +1,29 @@
 #include "ScalarConverter.hpp"
-#include <iomanip>
 
 void result(ScalarConverter *s, int type)
 {
     float number = atof(&(s->getString())[0]);
-    std::cout << "number " << number << std::endl;
-    std::cout << "char: ";
-    if (type == 0)
-        std::cout << "Non displayable" << std::endl;
+    if (type == 0 || ((number < 32 || number >= 127) && type != 0))
+        std::cout << "char: Non displayable" << std::endl;
     else
-        std::cout << "'" <<  static_cast<char>(number) << "'" << std::endl;
-    std::cout << "int: " << static_cast<int>(number) << std::endl;
-    std::cout << std::fixed << std::scientific << std::setprecision(3) << "float: " << static_cast<float>(number) << "f" << std::endl;
-    std::cout << "double: " << static_cast<double>(number) << std::endl;
+    {
+        if (number <= 0 || number > 255 || isnan(number))
+            std::cout << "char: impossible" << std::endl;
+        else
+            std::cout << "char: '" << static_cast<char>(number) << "'" << std::endl;
+    }
+    if (number > INT_MAX || number < INT_MIN || isnan(number))
+        std::cout << "int: impossible" << std::endl;
+    else
+        std::cout << "int: " << convert_int(s) << std::endl;
+    std::cout << "float: " << convert_float(s); 
+    if (convert_int(s) == convert_float(s))
+        std::cout << ".0";
+    std::cout << "f" << std::endl;
+    std::cout << "double: " << convert_double(s);
+    if (convert_int(s) == convert_double(s))
+        std::cout << ".0";
+    std::cout << std::endl;
 }
 
 void _convert(ScalarConverter *s)

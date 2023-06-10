@@ -3,13 +3,10 @@
 int is_int(ScalarConverter *s)
 {
     char *ptr;
-    long ret;
-
     std::string str = s->getString();
-    ret = strtol(&str[0],&ptr,10);
+    strtol(&str[0],&ptr,10);
     if (*ptr == '\0')
     {
-        std::cout << "the int " << ret << std::endl;
         s->setType(1);
         return 1;
     }
@@ -19,13 +16,10 @@ int is_int(ScalarConverter *s)
 int is_float(ScalarConverter *s)
 {
     char *ptr;
-    float ret_f;
     std::string str = s->getString();
-
-    ret_f = strtof(&str[0],&ptr);
+    strtof(&str[0],&ptr);
     if (*ptr == 'f' && *(ptr+1) == '\0')
     {
-        std::cout << "the float " << ret_f << std::endl;
         s->setType(2);
         return 1;
     }
@@ -35,13 +29,10 @@ int is_float(ScalarConverter *s)
 int is_double(ScalarConverter *s)
 {
     char *ptr;
-    double ret_d;
     std::string str = s->getString();
-
-    ret_d = strtod(&str[0],&ptr);
+    strtod(&str[0],&ptr);
     if (*ptr == '\0')
     {
-        std::cout << "the double " << ret_d << std::endl;
         s->setType(3);
         return 1;
     }
