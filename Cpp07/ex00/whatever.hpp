@@ -1,3 +1,6 @@
+#ifndef WHATEVER_HPP
+#define WHATEVER_HPP
+
 #include <iostream>
 
 template <typename T>
@@ -31,3 +34,5 @@ T3 max(T3 x, T3 y)
     else
         return y;
 }
+
+#endif
