@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Array.hpp>
+#include "Array.hpp"
 
 #define MAX_VAL 750
 int main(int, char**)
@@ -50,4 +50,8 @@ int main(int, char**)
     }
     delete [] mirror;//
     return 0;
+
+    // Array<int> dizi(10);
+    // int *a = new int[10];
+    // std::cout << a[5] << std::endl;
 }
