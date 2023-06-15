@@ -10,6 +10,8 @@ void printArray(T element)
 int main()
 {
     int Array[] = {54,76,874,345,234};
+    iter<int>(Array,5,printArray);
+    std::cout << std::endl;
     ::iter(Array,5,printArray);
 
     std::cout << std::endl;
