@@ -28,7 +28,7 @@ template<typename T>Array<T>::Array(unsigned int n)
 
 template<typename T>Array<T>::Array(const Array &copyA)
 {
-    * this = copyA;
+    * this = copyA; //
 }
 
 #endif
