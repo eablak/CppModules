@@ -67,5 +67,4 @@ template<typename T>Array<T>
     delete[] this->arr;
 }
 
-
 #endif
