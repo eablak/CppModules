@@ -4,19 +4,13 @@
 template<typename T>class Array{
 
     T* arr;
-    int len;
+    unsigned int len;
 
     public:
     Array();
     Array(unsigned int n);
     Array(const Array &copyA);
-    Array &operator=(const Array &copyA){
-        this->len = coppyA.len;
-        this->arr = new T[len];
-        for(int i = 0;i<len;i++)
-            this->arr[i] = coppyA.arr[i];
-        return (*this);
-    }
+    Array &operator=(const Array &copyA);
     ~Array();
 
     class OutOfRange: std::exception
@@ -25,14 +19,18 @@ template<typename T>class Array{
         {
             return "Out of Range";
         }
-    }
+    };
 
-    T &opeator[](unsigned int x)
+    T &operator[](unsigned int x)
     {
-        if (x > =this->len)
-            return OutOfRange;
+        if (x >= this->len)
+            throw OutOfRange();
         else
             return this->arr[this->len];
+    }
+
+    unsigned int size(){
+        return this->len;
     }
 };
 
@@ -51,19 +49,23 @@ template<typename T>Array<T>::Array(unsigned int n)
 
 template<typename T>Array<T>::Array(const Array &copyA)
 {
-    *this = copyA; //
+    *this = copyA;
+}
+
+template<typename T>
+Array<T> &Array<T>::operator=(const Array &copyA)
+{
+    this->len = copyA.len;
+    this->arr = new T[len];
+    for(unsigned int i = 0;i<len;i++)
+        this->arr[i] = copyA.arr[i];
+    return (*this);
 }
 
 template<typename T>Array<T>
-::~Array()
-{
+::~Array(){
     delete[] this->arr;
 }
 
-// template<typename T>Array<T>
-// ::Array &operator=(const Array &copyA)
-// {
-
-// }
 
 #endif
