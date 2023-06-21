@@ -26,7 +26,7 @@ template<typename T>class Array{
         if (x >= this->len)
             throw OutOfRange();
         else
-            return this->arr[this->len];
+            return this->arr[x];
     }
 
     unsigned int size(){
