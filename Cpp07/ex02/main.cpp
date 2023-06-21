@@ -31,7 +31,7 @@ int main(int, char**)
     }
     try
     {
-        numbers[-2] = 0;
+        numbers[2] = 0; // -2
     }
     catch(const std::exception& e)
     {
@@ -50,6 +50,8 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
+    // for(int i=0;i<MAX_VAL;i++)
+    //     std::cout << numbers[i] << std::endl;
     delete [] mirror;//
     return 0;
 }
