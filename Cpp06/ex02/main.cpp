@@ -1,4 +1,7 @@
 #include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
 int main(){
     Base *base;
@@ -7,7 +10,7 @@ int main(){
         base = generate();
         identify(base);
         identify(*base);
-        usleep(1000000000);
+        usleep(100000);
         std::cout << std::endl;
     }
 }

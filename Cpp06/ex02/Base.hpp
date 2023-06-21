@@ -1,12 +1,15 @@
 #ifndef BASE_HPP
 #define BASE_HPP
 
+
+class A;
+class B;
+class C;
+
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
-#include "A.hpp"
-#include "B.hpp"
-#include "C.hpp"
+
 
 class Base{
     public:
