@@ -2,6 +2,8 @@
 #include <array>
 #include <vector>
 #include <deque>
+#include <list>
+#include <forward_list>
 
 //!!!!makefile std11
 
@@ -12,9 +14,17 @@ void print_container(T &container)
     std::cout << container[i] << std::endl;
 }
 
+template<class T>
+void print_list(T &container)
+{
+  for(auto number : container)
+    std::cout << number << std::endl;
+}
+
 int main()
 {
   // 1) ARRAY
+
   std::cout << "ARRAY" << std::endl;
   std::array<int, 5> my_array = {47,76,43,65,13};
 
@@ -81,4 +91,42 @@ int main()
     std::cout << "value" << *it << std::endl; }
   catch (const std::exception &e){
     std::cerr << e.what(); }
+
+
+
+  // 4) LIST
+
+  std::cout << std::endl << std::endl << "LIST" << std::endl;
+
+  std::list<int> my_list = {9,5,8,1,7,3};
+  my_list.pop_back();
+  my_list.pop_back();
+  my_list.sort();
+
+  print_list(my_list);
+
+  try{
+    std::list<int>::iterator it = easyfind(my_list,7);
+    std::cout << "value: " << *it << std::endl; }
+  catch(const std::exception &e){
+    std::cerr << e.what(); }
+
+
+
+  // 5) FORWARD LIST
+
+  std::cout << std::endl << std::endl << "FORWARD LIST" << std::endl;
+  
+  std::forward_list<int> f_list = {-6,-6,-5,-4,-2};
+  f_list.push_front(-100);
+  f_list.reverse();
+  f_list.unique();
+
+  print_list(f_list);
+
+  try{
+    std::forward_list<int>::iterator it = easyfind(f_list,-100);
+    std::cout << "value: " << *it << std::endl; }
+  catch(const std::exception &e){
+    std::cerr << e.what(); } 
 }
