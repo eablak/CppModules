@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <exception>
+#include <cmath>
 
 class Span{
 
@@ -19,22 +20,22 @@ class Span{
 
     void addNumber(int number);
 
-    class AlreadyExist : public std::exception
+    class VectorFull : public std::exception
     {
         virtual const char* what() const throw()
         {
-            return "Value Already Exist";
+            return "Vector is Full";
         }
     };
 
     unsigned int shortestSpan();
     unsigned int longestSpan();
 
-    class NoNumber : std::exception
+    class NoSpan : std::exception
     {
         virtual const char* what() const throw()
         {
-            return "No Number";
+            return "No Span";
         }
     };
 

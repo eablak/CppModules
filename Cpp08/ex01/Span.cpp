@@ -11,17 +11,38 @@ Span::~Span(){}
 
 void Span::addNumber(int number)
 {
-    if (!my_vector.empty())
-    {
-        for(unsigned int i = 0; i < this->_size; i++)
-        {
-            if (this->my_vector[i] == number)
-                throw AlreadyExist();
-        }
-    }
+    // printf("%d %ld number:%d\n",this->_size, my_vector.size(),number);
+    // getchar();
+    if (my_vector.size() >= this->_size )
+        throw VectorFull();
     my_vector.push_back(number);
 }
 
+unsigned int Span::shortestSpan()
+{
+    if (my_vector.size() == 0 || my_vector.size() == 1)
+        throw NoSpan();
+
+    int shortest = 2147483647;
+    for(unsigned int i = 0;i < my_vector.size(); i++)
+        for(unsigned int j = i + 1; j < my_vector.size(); j++)
+            if (abs(my_vector[i] - my_vector[j]) < shortest )
+                shortest = abs(my_vector[i] - my_vector[j]);
+    return (shortest);
+}
+
+unsigned int Span::longestSpan()
+{
+    if (my_vector.size() == 0 || my_vector.size() == 1)
+        throw NoSpan();
+
+    int longest = 0;
+    for(unsigned int i = 0;i < my_vector.size(); i++)
+        for(unsigned int j = i + 1; j < my_vector.size(); j++)
+            if (abs(my_vector[i] - my_vector[j]) > longest )
+                longest = abs(my_vector[i] - my_vector[j]);
+    return (longest);
+}
 
 void Span::print_vector()
 {
