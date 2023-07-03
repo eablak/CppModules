@@ -15,10 +15,17 @@ void print_container(T &container)
 }
 
 template<class T>
-void print_list(T &container)
+void for_list(T &container)
 {
   for(auto number : container)
     std::cout << number << std::endl;
+}
+
+template<class T>
+void foreach_list(T &container)
+{
+  std::for_each(container.begin(), container.end(), [](const int n){ std::cout << n << " ";});
+  std::cout << "\n";
 }
 
 int main()
@@ -102,8 +109,11 @@ int main()
   my_list.pop_back();
   my_list.pop_back();
   my_list.sort();
+  my_list.push_back(99);
+  my_list.push_front(-99);
 
-  print_list(my_list);
+  for_list(my_list);
+  foreach_list(my_list);
 
   try{
     std::list<int>::iterator it = easyfind(my_list,7);
@@ -121,8 +131,10 @@ int main()
   f_list.push_front(-100);
   f_list.reverse();
   f_list.unique();
+  f_list.push_front(77);
 
-  print_list(f_list);
+  for_list(f_list);
+  foreach_list(f_list);
 
   try{
     std::forward_list<int>::iterator it = easyfind(f_list,-100);
