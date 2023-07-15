@@ -5,7 +5,7 @@ SOURCES = main.cpp BitcoinExchange.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 
 CC = c++
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CPPFLAGS = -Wall -Wextra -Werror -std=c++11
 
 all: $(NAME)
 

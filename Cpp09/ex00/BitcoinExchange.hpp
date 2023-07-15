@@ -6,14 +6,15 @@
 #include <map>
 #include <algorithm>
 #include <string>
-
+#include <unordered_map>
+#include <list>
 
 class BitcoinExchange
 {
 
     private:
     std::map<std::string, float> map;
-    std::multimap<std::string, std::string>multimap;
+    std::list<std::pair<std::string, std::string>>lst;
 
     public:
 
@@ -25,6 +26,7 @@ class BitcoinExchange
     void CheckFile(std::string file_name);
     void ParseDatacsv(const std::string file);
     void HandleInputFile(std::string file);
+    void getExchange();
 };
 
 #endif

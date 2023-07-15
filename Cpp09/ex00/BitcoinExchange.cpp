@@ -40,10 +40,6 @@ void BitcoinExchange::ParseDatacsv(const std::string file)
         this->map.insert(std::make_pair(line.substr(0,pos),(line.substr(pos).length())));
     }
     data_file.close();
-
-    // std::map<std::string, float>::iterator it;
-    // for(it=map.begin();it!=map.end();it++)
-    //     std::cout << "first: " <<  it->first << " second:" << it->second << std::endl;
 }
 
 void BitcoinExchange::HandleInputFile(std::string file){
@@ -60,17 +56,20 @@ void BitcoinExchange::HandleInputFile(std::string file){
             continue;
         }
         std::size_t pos = line.find("|");
-        if (pos > line.length()) // no pipe
-        {
-            this->multimap.insert(std::make_pair("Error: bad input => ",line));
-        }
+        if (pos > line.length())
+            this->lst.push_back(std::make_pair(line," "));
         else
-            this->multimap.insert(std::make_pair(line.substr(0,pos),line.substr(pos)));
+            this->lst.push_back(std::make_pair(line.substr(0,pos),line.substr(pos)));
     }
     input_file.close();
 
-    std::map<std::string, std::string>::iterator it;
-    for(it = multimap.begin(); it != multimap.end(); it++)
-        std::cout <<  it->first << it->second << std::endl;
+}
 
+void BitcoinExchange::getExchange()
+{
+    std::list<std::pair<std::string, std::string>>::iterator it;
+    for(it = lst.begin(); it != lst.end(); it++)
+    {
+        std::cout <<  it->first << it->second << std::endl;
+    }
 }
