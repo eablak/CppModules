@@ -2,12 +2,18 @@
 
 int main(int ac, char **av)
 {
+
+    // data.csv , parse
+    // input file check (|, date, valid value)
+    // input file tarihi data.csv'de bul ve işle 
+
     if (ac != 2)
     {
-        std::cout << "Arg error" << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         exit(1);
     }
 
     BitcoinExchange btc;
     btc.CheckFile(av[1]);
+    btc.parse_datacsv("data.csv");
 }
