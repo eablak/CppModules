@@ -37,7 +37,7 @@ void BitcoinExchange::ParseDatacsv(const std::string file)
             continue;
         }
         std::size_t pos = line.find(",");
-        this->map.insert(std::make_pair(line.substr(0,pos),(line.substr(pos).length())));
+        this->map.insert(std::make_pair(line.substr(0,pos),std::stof(line.substr(pos+1))));
     }
     data_file.close();
 }
@@ -57,19 +57,56 @@ void BitcoinExchange::HandleInputFile(std::string file){
         }
         std::size_t pos = line.find("|");
         if (pos > line.length())
-            this->lst.push_back(std::make_pair(line," "));
-        else
-            this->lst.push_back(std::make_pair(line.substr(0,pos),line.substr(pos)));
+            this->lst.push_back(std::make_pair("Error: ","bad input => " + line));
+        else{
+            long int number = std::stof(line.substr(pos+1));
+            if (number < 0)
+                this->lst.push_back(std::make_pair("Error: ","not a positive number."));
+            else if (number > INT_MAX)
+                this->lst.push_back(std::make_pair("Error: ","too large a number."));
+            else
+                this->lst.push_back(std::make_pair(line.substr(0,pos-1),line.substr(pos+1)));
+        }
     }
     input_file.close();
 
 }
 
-void BitcoinExchange::getExchange()
+void BitcoinExchange::GetExchange()
 {
     std::list<std::pair<std::string, std::string>>::iterator it;
+    std::map<std::string, float>::iterator ite;
+    std::list<std::pair<std::string, std::string>>::iterator res;
+
+    int match = false;
     for(it = lst.begin(); it != lst.end(); it++)
     {
-        std::cout <<  it->first << it->second << std::endl;
+        if (it->first != "Error: "){
+            for(ite = map.begin(); ite != map.end(); ite++){
+                if (it->first == ite->first)
+                {
+                    match = true;
+                    float nbr = ite->second * std::stoi(it->second);
+                    std::stringstream s;
+                    s<<nbr;
+                    std::string result = s.str();
+                    this->res.push_back(std::make_pair(it->first + " =>" + it->second," = " + result));
+                }
+            }
+            if (match == false)
+            {
+                std::cout << "islem " <<std::endl;
+            }
+        }
+        else
+            this->res.push_back(std::make_pair(it->first,it->second));
     }
+}
+//T_DATE!!!!
+void BitcoinExchange::GetResult()
+{
+    std::list<std::pair<std::string, std::string>>::iterator it;
+
+    for(it = res.begin(); it != res.end(); it++)
+        std::cout << it->first << it->second << std::endl;
 }

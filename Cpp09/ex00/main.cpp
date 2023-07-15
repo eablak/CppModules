@@ -17,5 +17,6 @@ int main(int ac, char **av)
     btc.CheckFile(av[1]);
     btc.ParseDatacsv("data.csv");
     btc.HandleInputFile(av[1]);
-    btc.getExchange();
+    btc.GetExchange();
+    btc.GetResult();
 }

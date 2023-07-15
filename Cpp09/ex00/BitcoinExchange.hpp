@@ -8,6 +8,8 @@
 #include <string>
 #include <unordered_map>
 #include <list>
+#include <limits.h>
+#include <bits/stdc++.h>
 
 class BitcoinExchange
 {
@@ -15,6 +17,7 @@ class BitcoinExchange
     private:
     std::map<std::string, float> map;
     std::list<std::pair<std::string, std::string>>lst;
+    std::list<std::pair<std::string, std::string>>res;
 
     public:
 
@@ -26,7 +29,8 @@ class BitcoinExchange
     void CheckFile(std::string file_name);
     void ParseDatacsv(const std::string file);
     void HandleInputFile(std::string file);
-    void getExchange();
+    void GetExchange();
+    void GetResult();
 };
 
 #endif
