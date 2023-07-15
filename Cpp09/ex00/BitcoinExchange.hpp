@@ -13,6 +13,7 @@ class BitcoinExchange
 
     private:
     std::map<std::string, float> map;
+    std::multimap<std::string, std::string>multimap;
 
     public:
 
@@ -22,7 +23,8 @@ class BitcoinExchange
     ~BitcoinExchange();
 
     void CheckFile(std::string file_name);
-    void parse_datacsv(const std::string file);
+    void ParseDatacsv(const std::string file);
+    void HandleInputFile(std::string file);
 };
 
 #endif
