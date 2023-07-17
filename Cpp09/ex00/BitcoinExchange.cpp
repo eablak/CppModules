@@ -10,9 +10,24 @@ void BitcoinExchange::CheckFile(std::string file_name)
 {
     std::fstream my_file;
     my_file.open(&file_name[0], std::ios::in);
-    if (!my_file)
-    {
-        std::cout << "No such file" << std::endl;
+    if (my_file.is_open()){
+        std::string line;
+        bool is_empty = true;
+        while(getline(my_file,line)){
+            if (!line.empty()){
+                is_empty = false;
+                break;
+            }
+        }
+        if (is_empty)
+        {
+            std::cout << "Error: file is empty" << std::endl;
+            my_file.close();
+            exit(1);    
+        }
+    }else{
+        std::cout << "Error: No such file" << std::endl;
+        my_file.close();
         exit(1);
     }
     my_file.close();
@@ -25,6 +40,7 @@ void BitcoinExchange::ParseDatacsv(const std::string file)
     if(!data_file)
     {
         std::cout << "No such file" << std::endl;
+        data_file.close();
         exit(1);
     }
     int start = true;
@@ -42,6 +58,7 @@ void BitcoinExchange::ParseDatacsv(const std::string file)
     data_file.close();
 }
 
+
 void BitcoinExchange::HandleInputFile(std::string file){
     
     std::fstream input_file;
@@ -50,7 +67,7 @@ void BitcoinExchange::HandleInputFile(std::string file){
     int start = true;
     while(getline(input_file,line))
     {
-        if (start)
+        if (start && line == "date | value")
         {
             start = false;
             continue;
@@ -59,18 +76,27 @@ void BitcoinExchange::HandleInputFile(std::string file){
         if (pos > line.length())
             this->lst.push_back(std::make_pair("Error: ","bad input => "+line));
         else{
-            long int number = std::stof(line.substr(pos+1));
-            if (number < 0)
-                this->lst.push_back(std::make_pair("Error: ","not a positive number."));
-            else if (number > 1000)
-                this->lst.push_back(std::make_pair("Error: ","too large a number."));
-            else
-                this->lst.push_back(std::make_pair(line.substr(0,pos-1),line.substr(pos+1)));
+            try{
+                float number = std::stof(line.substr(pos+1));
+                if (number < 0)
+                    this->lst.push_back(std::make_pair("Error: ","not a positive number."));
+                else if (number > 1000)
+                    this->lst.push_back(std::make_pair("Error: ","too large a number."));
+                else
+                    this->lst.push_back(std::make_pair(line.substr(0,pos-1),line.substr(pos+1)));
+            }
+            catch(const std::exception &e){
+                this->lst.push_back(std::make_pair("Error: ","bad input =>"+line.substr(pos+1)));
+            }
         }
     }
     input_file.close();
-
 }
+
+// int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it){
+//     (void) it;
+//     return 1;
+// }
 
 void BitcoinExchange::GetExchange()
 {
@@ -81,21 +107,23 @@ void BitcoinExchange::GetExchange()
     int match = false;
     for(it = lst.begin(); it != lst.end(); it++)
     {
-        if (it->first != "Error: "){
-            for(ite = map.begin(); ite != map.end(); ite++){
-                if (it->first == ite->first)
-                {
-                    match = true;
-                    float nbr = ite->second * std::stoi(it->second);
-                    std::stringstream s;
-                    s<<nbr;
-                    std::string result = s.str();
-                    this->res.push_back(std::make_pair(it->first + " =>" + it->second," = " + result));
+        // if (this->CheckValidDate(it)){
+            if (it->first != "Error: "){
+                for(ite = map.begin(); ite != map.end(); ite++){
+                    if (it->first == ite->first)
+                    {
+                        match = true;
+                        float nbr = ite->second * std::stoi(it->second);
+                        std::stringstream s;
+                        s<<nbr;
+                        std::string result = s.str();
+                        this->res.push_back(std::make_pair(it->first + " =>" + it->second," = " + result));
+                    }
                 }
+                if (match == false)
+                    FindValue(it);
             }
-            if (match == false)
-                FindValue(it);
-        }
+        // }
         else
             this->res.push_back(std::make_pair(it->first,it->second));
     }
@@ -126,7 +154,5 @@ void BitcoinExchange::GetResult()
 
 /*
     yyyy-mm-dd kontrol
-    doğru değerler işlem
     =operator
-    boş satır
 */
