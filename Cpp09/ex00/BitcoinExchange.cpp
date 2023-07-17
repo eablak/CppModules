@@ -5,13 +5,10 @@ BitcoinExchange::~BitcoinExchange(){}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &copyB){ *this = copyB; }
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copyB) 
 {
-    std::list<std::pair<std::string, std::string>>::iterator it;
-    for(it = this->res.begin(); it != this->res.end(); it++){
-        res.begin()->first.clear();
-        res.begin()->first = copyB.res.begin()->first;
-        res.begin()->second.clear();
-        res.begin()->second = copyB.res.begin()->second;
-    }
+    this->lst = copyB.lst;
+    this->res = copyB.res;
+    this->map = copyB.map;
+    return (*this);
 }
 
 void BitcoinExchange::CheckFile(std::string file_name)
@@ -163,6 +160,7 @@ void BitcoinExchange::GetExchange()
     int match = false;
     for(it = lst.begin(); it != lst.end(); it++)
     {
+        match = false;
         if (it->first != "Error: "){
             if (CheckValidDate(it) && CheckValidValue(it))
             {

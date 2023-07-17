@@ -16,4 +16,17 @@ int main(int ac, char **av)
     btc.GetExchange();
     btc.GetResult();
 
+    std::cout<<std::endl;
+
+    BitcoinExchange btc2;
+    btc2.CheckFile("input2.txt");
+    btc2.ParseDatacsv("data.csv");
+    btc2.HandleInputFile("input2.txt");
+    btc2.GetExchange();
+    btc2.GetResult();
+
+    std::cout<<std::endl;
+
+    btc = btc2;
+    btc.GetResult();
 }
