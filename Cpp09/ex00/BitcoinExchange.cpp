@@ -93,10 +93,49 @@ void BitcoinExchange::HandleInputFile(std::string file){
     input_file.close();
 }
 
-// int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it){
-//     (void) it;
-//     return 1;
-// }
+int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it){
+
+    if (it->first.length() != 10)
+        return 0;
+    std::string year,month,day,div,div_two;
+    year = it->first.substr(0,4);
+    month = it->first.substr(5,2);
+    day = it->first.substr(8,2);
+    div = it->first.substr(4,1);
+    div_two = it->first.substr(7,1);
+    
+    if (div == "-" && div_two == "-"){
+        try{
+            
+            int int_year = std::stoi(year);
+            int int_month = std::stoi(month);
+            int int_day = std::stoi(day);
+
+            if (int_year < 2009 || int_year > 9999 || int_month < 1 || int_month > 12 || int_day < 1 || int_day > 31)
+                return 0;
+
+            if ((int_month == 4 || int_month == 6 || int_month == 9 || int_month == 11) && int_day > 30)
+                return 0;
+
+            if (int_month == 2){
+                if (int_month == 2) {
+                    int max_day = 28;
+                    if (int_year % 4 == 0)
+                        max_day = 29;
+                    if ((int_year % 100 == 0 && int_year % 400 != 0) || (int_year % 400 == 0 && int_year % 4000 == 0)) 
+                        max_day = 28;
+                    if (int_day > max_day)
+                        return 0; }
+            }
+
+            return 1;
+        }
+        catch(const std::exception &e){
+            return 0;
+        }
+    }
+    return 0;
+}
 
 void BitcoinExchange::GetExchange()
 {
@@ -107,8 +146,9 @@ void BitcoinExchange::GetExchange()
     int match = false;
     for(it = lst.begin(); it != lst.end(); it++)
     {
-        // if (this->CheckValidDate(it)){
-            if (it->first != "Error: "){
+        if (it->first != "Error: "){
+            if (CheckValidDate(it))
+            {
                 for(ite = map.begin(); ite != map.end(); ite++){
                     if (it->first == ite->first)
                     {
@@ -121,9 +161,11 @@ void BitcoinExchange::GetExchange()
                     }
                 }
                 if (match == false)
-                    FindValue(it);
+                    FindValue(it);      
             }
-        // }
+            else
+                this->res.push_back(std::make_pair("Error: ","invalid date"));
+        }
         else
             this->res.push_back(std::make_pair(it->first,it->second));
     }
@@ -149,10 +191,3 @@ void BitcoinExchange::GetResult()
     for(it = res.begin(); it != res.end(); it++)
         std::cout << it->first << it->second << std::endl;
 }
-
-
-
-/*
-    yyyy-mm-dd kontrol
-    =operator
-*/

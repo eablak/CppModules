@@ -32,7 +32,7 @@ class BitcoinExchange
     void GetExchange();
     void GetResult();
     void FindValue(std::list<std::pair<std::string, std::string>>::iterator it);
-    // int CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it);
+    int CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it);
 };
 
 #endif
