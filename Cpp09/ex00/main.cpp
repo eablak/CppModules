@@ -19,4 +19,5 @@ int main(int ac, char **av)
     btc.HandleInputFile(av[1]);
     btc.GetExchange();
     btc.GetResult();
+
 }

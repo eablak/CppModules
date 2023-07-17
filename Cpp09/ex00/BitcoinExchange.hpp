@@ -31,6 +31,7 @@ class BitcoinExchange
     void HandleInputFile(std::string file);
     void GetExchange();
     void GetResult();
+    void FindValue(std::list<std::pair<std::string, std::string>>::iterator it);
 };
 
 #endif

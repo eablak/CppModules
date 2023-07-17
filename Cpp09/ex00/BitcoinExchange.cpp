@@ -57,12 +57,12 @@ void BitcoinExchange::HandleInputFile(std::string file){
         }
         std::size_t pos = line.find("|");
         if (pos > line.length())
-            this->lst.push_back(std::make_pair("Error: ","bad input => " + line));
+            this->lst.push_back(std::make_pair("Error: ","bad input => "+line));
         else{
             long int number = std::stof(line.substr(pos+1));
             if (number < 0)
                 this->lst.push_back(std::make_pair("Error: ","not a positive number."));
-            else if (number > INT_MAX)
+            else if (number > 1000)
                 this->lst.push_back(std::make_pair("Error: ","too large a number."));
             else
                 this->lst.push_back(std::make_pair(line.substr(0,pos-1),line.substr(pos+1)));
@@ -94,15 +94,26 @@ void BitcoinExchange::GetExchange()
                 }
             }
             if (match == false)
-            {
-                std::cout << "islem " <<std::endl;
-            }
+                FindValue(it);
         }
         else
             this->res.push_back(std::make_pair(it->first,it->second));
     }
 }
-//T_DATE!!!!
+
+void BitcoinExchange::FindValue(std::list<std::pair<std::string, std::string>>::iterator it)
+{
+    auto find = map.lower_bound(it->first);
+    if (find->first != map.begin()->first)
+        find--;
+    float nbr = find->second * std::stof(it->second);
+    std::stringstream s;
+    s<<nbr;
+    std::string result = s.str();
+    this->res.push_back(std::make_pair(it->first + " =>" + it->second," = " + result));
+}
+
+
 void BitcoinExchange::GetResult()
 {
     std::list<std::pair<std::string, std::string>>::iterator it;
@@ -110,3 +121,12 @@ void BitcoinExchange::GetResult()
     for(it = res.begin(); it != res.end(); it++)
         std::cout << it->first << it->second << std::endl;
 }
+
+
+
+/*
+    yyyy-mm-dd kontrol
+    doğru değerler işlem
+    =operator
+    boş satır
+*/
