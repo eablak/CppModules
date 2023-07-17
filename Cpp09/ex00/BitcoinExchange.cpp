@@ -4,7 +4,15 @@ BitcoinExchange::BitcoinExchange(){}
 BitcoinExchange::~BitcoinExchange(){}
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &copyB){ *this = copyB; }
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &copyB) 
-{(void) copyB; return (*this);} // !
+{
+    std::list<std::pair<std::string, std::string>>::iterator it;
+    for(it = this->res.begin(); it != this->res.end(); it++){
+        res.begin()->first.clear();
+        res.begin()->first = copyB.res.begin()->first;
+        res.begin()->second.clear();
+        res.begin()->second = copyB.res.begin()->second;
+    }
+}
 
 void BitcoinExchange::CheckFile(std::string file_name)
 {
@@ -78,12 +86,14 @@ void BitcoinExchange::HandleInputFile(std::string file){
         else{
             try{
                 float number = std::stof(line.substr(pos+1));
+
                 if (number < 0)
                     this->lst.push_back(std::make_pair("Error: ","not a positive number."));
                 else if (number > 1000)
                     this->lst.push_back(std::make_pair("Error: ","too large a number."));
-                else
+                else 
                     this->lst.push_back(std::make_pair(line.substr(0,pos-1),line.substr(pos+1)));
+                
             }
             catch(const std::exception &e){
                 this->lst.push_back(std::make_pair("Error: ","bad input =>"+line.substr(pos+1)));
@@ -137,6 +147,13 @@ int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string
     return 0;
 }
 
+int BitcoinExchange::CheckValidValue(std::list<std::pair<std::string, std::string>>::iterator it){
+    for(char c : it->second)
+        if (!std::isdigit(c) && (c != '-' && c != '.' && c != ' '))
+            return 0;
+    return 1;
+}
+
 void BitcoinExchange::GetExchange()
 {
     std::list<std::pair<std::string, std::string>>::iterator it;
@@ -147,7 +164,7 @@ void BitcoinExchange::GetExchange()
     for(it = lst.begin(); it != lst.end(); it++)
     {
         if (it->first != "Error: "){
-            if (CheckValidDate(it))
+            if (CheckValidDate(it) && CheckValidValue(it))
             {
                 for(ite = map.begin(); ite != map.end(); ite++){
                     if (it->first == ite->first)
