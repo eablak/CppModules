@@ -8,6 +8,9 @@ int main(int ac, char *av[])
     }
     
     RPN rpn;
-    rpn.ExpCount(av[1]);
-    // rpn.FillRPN();
+    rpn.HandleExp(av[1]);
+    if (rpn.CheckVector())
+        rpn.ProcessRPN();
+    else
+        std::cout << "Error: Expression" << std::endl;
 }

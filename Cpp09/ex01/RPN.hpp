@@ -3,14 +3,16 @@
 #include <queue>
 #include <iostream>
 #include <sstream>
+#include <vector>
+#include <map>
 
 class RPN{
     
     std::queue<std::string>myQueue;
+    std::vector<std::string>myVector;
 
     public:
-
-    unsigned int count;
+    std::stringstream ss;
     std::string *arr;
 
     RPN();
@@ -18,8 +20,9 @@ class RPN{
     RPN &operator=(const RPN &copyR);
     ~RPN();
 
-    void ExpCount(std::string av);
-    void FillRPN();
+    void HandleExp(std::string av);
+    int CheckVector();
+    void ProcessRPN();
 };
 
 #endif
