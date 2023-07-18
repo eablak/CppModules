@@ -2,7 +2,10 @@
 
 RPN::RPN(){}
 RPN::RPN(const RPN &copyR){ *this = copyR; }
-RPN &RPN::operator=(const RPN &copyR){ (void) copyR; return (*this); } //!
+RPN &RPN::operator=(const RPN &copyR){ 
+    this->myDeque = copyR.myDeque;
+    this->myVector = copyR.myVector;
+    return (*this); }
 RPN::~RPN(){}
 
 void RPN::HandleExp(std::string rpn_exp){
@@ -18,45 +21,76 @@ void RPN::HandleExp(std::string rpn_exp){
     ss.str(rpn_exp);
     while(ss>>str)
         myVector.push_back(str);
-
-    // for(unsigned int i = 0;i<myVector.size();i++)
-    //     std::cout << myVector[i] <<std::endl;
 }
 
 int RPN::CheckVector(){
+
+    int try_c = 0, catch_c = 0, treshold = 0;
+
     for(unsigned int i = 0;i<myVector.size();i++){
         if (myVector[i].length() > 1)
             return (0);
-
         try{
                 std::stoi(myVector[i]);
-                if (i == myVector.size() - 1)
-                    return 0;
+                try_c++;
+                treshold++;
         } catch(const std::exception &e){
+            catch_c++;
+            treshold--;
             if (myVector[i] != "*" && myVector[i] != "/"
                 && myVector[i] != "+" && myVector[i] != "-")
                 return 0; 
-            if (i == 0 || i%2==1)
-                return 0;
             }
+        if (treshold < 1)
+            return 0;
     }
+    if (try_c-1 != catch_c)
+        return 0;
     return 1;
 }
 
-void RPN::ProcessRPN(){
+void DequeUtils(float result,std::deque<float>& myDeque){
+    myDeque.pop_back();
+    myDeque.pop_back();
+    myDeque.push_back(result);
+}
 
-    int result = std::stoi(myVector[0]);
-    for(unsigned int i = 1;i < myVector.size();i+=2){
-        if (myVector[i+1] == "+")
-            result = result + std::stoi(myVector[i]);
-        else if (myVector[i+1] == "-")
-            result = result - std::stoi(myVector[i]);
-        else if (myVector[i+1] == "*")
-            result = result * std::stoi(myVector[i]);
-        else if (myVector[i+1] == "/")
-            result = result / std::stoi(myVector[i]);
-        if (i == myVector.size() - 2)
+void ProccessRPNutils(int op,float result, std::deque<float>& myDeque){
+    switch(op){
+        case 1:
+            result = myDeque[myDeque.size() - 2] + myDeque[myDeque.size() - 1];
+            DequeUtils(result,myDeque);
+            break;
+        case 2:
+            result = myDeque[myDeque.size() - 2] - myDeque[myDeque.size() - 1];
+            DequeUtils(result,myDeque);
+            break;
+        case 3:
+            result = myDeque[myDeque.size() - 2] * myDeque[myDeque.size() - 1];
+            DequeUtils(result,myDeque);
+            break;
+        case 4:
+            result = myDeque[myDeque.size() - 2] / myDeque[myDeque.size() - 1];
+            DequeUtils(result,myDeque);
             break;
     }
-    std::cout << result << std::endl;
+}
+
+void RPN::ProcessRPN(){
+    float result = 0;
+    for(unsigned int i =0; i< myVector.size(); i++){
+        try{
+            myDeque.push_back(std::stoi(myVector[i]));
+        } catch (const std::exception &e){
+            if (myVector[i] == "+")
+                ProccessRPNutils(1,result,myDeque);
+            else if (myVector[i] == "-")
+                ProccessRPNutils(2,result,myDeque);
+            else if (myVector[i] == "*")
+                ProccessRPNutils(3,result,myDeque);
+            else if (myVector[i] == "/")
+                ProccessRPNutils(4,result,myDeque);
+        }
+    }
+    std::cout << myDeque[0] << std::endl;
 }

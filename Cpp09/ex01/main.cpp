@@ -12,5 +12,5 @@ int main(int ac, char *av[])
     if (rpn.CheckVector())
         rpn.ProcessRPN();
     else
-        std::cout << "Error: Expression" << std::endl;
+        std::cout << "Error" << std::endl;
 }

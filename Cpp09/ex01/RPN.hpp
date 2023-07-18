@@ -1,6 +1,7 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 #include <queue>
+#include <deque>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -8,12 +9,11 @@
 
 class RPN{
     
-    std::queue<std::string>myQueue;
+    std::deque<float>myDeque;
     std::vector<std::string>myVector;
 
     public:
     std::stringstream ss;
-    std::string *arr;
 
     RPN();
     RPN(const RPN &copyR);
