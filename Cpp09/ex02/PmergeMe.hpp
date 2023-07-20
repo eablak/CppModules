@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <algorithm>
 
 class PmergeMe{
 
@@ -14,6 +15,13 @@ class PmergeMe{
 
     int PmergeMeCheck(int ac, char **av);
     void FillContainers(int ac,char **av);
+    void Process(int ac,char **av);
+    template <class T>
+    void MergeInsertSort(T &container);
+    template <class T>
+    void InsertSort(T &container);
+    template <class T>
+    void PrintContainer(T &container);
 };
 
 

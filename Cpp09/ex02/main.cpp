@@ -14,4 +14,5 @@ int main(int ac, char *av[]){
     if (pmergeme.PmergeMeCheck(ac,av)==0)
         myError();
     pmergeme.FillContainers(ac,av);
+    pmergeme.Process(ac,av);
 }
