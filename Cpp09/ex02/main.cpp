@@ -1,7 +1,7 @@
 #include "PmergeMe.hpp"
 
 void myError(){
-    std::cerr << "Error" << std::endl;
+    std::cout << "Error" << std::endl;
     exit(1);
 }
 
@@ -13,5 +13,5 @@ int main(int ac, char *av[]){
     PmergeMe pmergeme;
     if (pmergeme.PmergeMeCheck(ac,av)==0)
         myError();
-
+    pmergeme.FillContainers(ac,av);
 }
