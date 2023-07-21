@@ -17,11 +17,16 @@ class PmergeMe{
     void FillContainers(int ac,char **av);
     void Process(int ac,char **av);
     template <class T>
-    void MergeInsertSort(T &container);
+    void MergeInsertSort(T &container, size_t treshold);
     template <class T>
     void InsertSort(T &container);
     template <class T>
     void PrintContainer(T &container);
+
+    PmergeMe();
+    PmergeMe(const PmergeMe &copyM);
+    PmergeMe &operator=(const PmergeMe &copyM);
+    ~PmergeMe();
 };
 
 
