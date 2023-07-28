@@ -1,20 +1,21 @@
 #include "Bureaucrat.hpp"
-//zsh iot check
+
 int main()
 {
-    Bureaucrat e;
     Bureaucrat bureaucrat("esra",10);
-    std::cout << bureaucrat.getName() << std::endl;
-    std::cout << bureaucrat << std::endl;
-    Bureaucrat b("toomuch",1);
-    // b.incrementGrade();
+    std::cout << bureaucrat;
+    Bureaucrat b("toomuch",2);
     Bureaucrat b2("b",45);
-    b2.incrementGrade();
-    b2.decrementGrade();
-    b2.decrementGrade();
-    std::cout << b2.getGrade() << std::endl;
-    std::cout << b2;
-
-
-    Bureaucrat b_ex("dsf",0);
+    try {
+        b.incrementGrade();
+        std::cout << b2.getGrade() << std::endl;
+        b2.incrementGrade();
+        std::cout << b2.getGrade() << std::endl;
+        b2.decrementGrade();
+        std::cout << b2.getGrade() << std::endl;
+        b.incrementGrade();
+        std::cout << b.getGrade() << std::endl;
+    } catch(std::exception &e){
+        std::cout << e.what();
+    }
 }

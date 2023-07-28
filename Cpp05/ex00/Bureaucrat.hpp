@@ -21,19 +21,19 @@ class Bureaucrat
     void incrementGrade();
     void decrementGrade();
 
-    class GradeTooHighException : std::exception
+    class GradeTooHighException : public std::exception
     {
         virtual const char* what() const throw()
         {
-            return "Grade Too High";
+            return "Grade Too High\n";
         }
     };
 
-    class GradeTooLowException : std::exception
+    class GradeTooLowException : public std::exception
     {
         virtual const char* what() const throw()
         {
-            return "Grade Too Low";
+            return "Grade Too Low\n";
         }
     };
 };
