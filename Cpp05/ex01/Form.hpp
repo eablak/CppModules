@@ -26,7 +26,7 @@ class Form
     int get_execute_grade() const;
     bool get_is_signed() const;
 
-    class GradeTooHighException: std::exception
+    class GradeTooHighException: public std::exception
     {
         virtual const char* what() const throw()
         {
@@ -34,7 +34,7 @@ class Form
         }
     };
 
-    class GradeTooLowException: std::exception
+    class GradeTooLowException: public std::exception
     {
         virtual const char* what() const throw()
         {

@@ -11,18 +11,23 @@ int main()
     AForm* rrf2;
     // AForm* rrf3;
 
-    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-    rrf2 = someRandomIntern.makeForm("presidential pardon","ppardoon");
-    // rrf3 = someRandomIntern.makeForm("shrubbery","shrubbery");
+    try{
 
-    Bureaucrat b("a",3);
-    rrf->beSigned(b);
-    rrf->execute(b);
+            rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+            rrf2 = someRandomIntern.makeForm("presidential pardon","ppardoon");
+            // rrf3 = someRandomIntern.makeForm("shrubbery","shrubbery");
 
-    std::cout << rrf2->get_is_signed() << std::endl;
-    rrf2->set_sign(true);
-    std::cout << rrf2->get_execute_grade() << std::endl;
-    rrf2->execute(b);
+            Bureaucrat b("a",3);
+            rrf->beSigned(b);
+            rrf->execute(b);
+
+            std::cout << std::endl << rrf2->get_is_signed() << std::endl;
+            rrf2->set_sign(true);
+            std::cout << rrf2->get_execute_grade() << std::endl;
+            rrf2->execute(b);
+    } catch(std::exception &e){
+        std::cout << e.what() << std::endl;
+    }
 
     // delete rrf;
 }

@@ -15,7 +15,7 @@ class Intern{
     Intern &operator=(const Intern &i);
     ~Intern();
 
-    class InvalidFormNameException: std::exception
+    class InvalidFormNameException: public std::exception
     {
         virtual const char * what() const throw()
         {

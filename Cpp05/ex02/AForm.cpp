@@ -35,10 +35,9 @@ bool AForm::get_is_signed() const
 
 void AForm::beSigned(Bureaucrat &b)
 {
-    if (b.getGrade() < this->sign_grade)
-        this->is_signed = true;
-    else
+    if (get_sign_grade() < b.getGrade())
         throw GradeTooLowException();
+    this->is_signed = true;
 }
 
 void AForm::set_sign(bool sign)
