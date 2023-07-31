@@ -11,8 +11,6 @@ Span::~Span(){}
 
 void Span::addNumber(int number)
 {
-    // printf("%d %ld number:%d\n",this->_size, my_vector.size(),number);
-    // getchar();
     if (my_vector.size() >= this->_size )
         throw VectorFull();
     my_vector.push_back(number);
