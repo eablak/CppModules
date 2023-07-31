@@ -21,13 +21,10 @@ void result(ScalarConverter *s, int type)
         if (convert_int(s) == convert_float(s))
             std::cout << ".0";
         std::cout << "f" << std::endl; }
-    // if (std::isinf(convert_double(s)))
-    //     std::cout << "double: inf" << std::endl;
-    // else {
         std::cout << "double: " << convert_double(s);
         if (convert_int(s) == convert_double(s))
             std::cout << ".0";
-        std::cout << std::endl; //}
+        std::cout << std::endl;
 }
 
 void _convert(ScalarConverter *s)
