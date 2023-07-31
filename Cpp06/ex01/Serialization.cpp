@@ -1,13 +1,13 @@
 #include "Serialization.hpp"
 
-Serialization::Serialization(){ std::cout << "seralization created" << std::endl; }
+Serialization::Serialization(){ }
 Serialization::Serialization(const Serialization &copyS) { 
-    *this = copyS; std::cout << "serialization copy constructor" << std::endl; }
+    *this = copyS;}
 Serialization &Serialization::operator=(const Serialization &copyS) { 
     if (this == &copyS)
         return (*this);
     return (*this); }
-Serialization::~Serialization(){ std::cout << "seralization destructor called" << std::endl; }
+Serialization::~Serialization(){}
 
 uintptr_t Serialization::serialize(Data *ptr)
 {

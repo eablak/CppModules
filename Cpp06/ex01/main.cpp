@@ -11,21 +11,26 @@ int main()
     data2->level = 8.7;
 
     Serialization s;
-    std::cout << "before serialized: " << std::endl;
-    std::cout << "data: " << &data << " data2: " << data2 << std::endl;
-    std::cout << "data " << data.login << " data2: " << data2->login << std::endl;
-    std::cout << "data " << data.level << " data2: " << data2->level << std::endl;
-    data2 = s.deserialize(s.serialize(&data));
-    std::cout << "after serialized: " << std::endl;
-    std::cout << "data: " << &data << " data2: " << data2 << std::endl;
-    std::cout << "data: " << data.login << " data2: " << data2->login << std::endl;
-    std::cout << "data: " << data.level << " data2: " << data2->level << std::endl;
+    // std::cout << "before serialized: " << std::endl;
+    // std::cout << "data: " << &data << " data2: " << data2 << std::endl;
+    // std::cout << "data " << data.login << " data2: " << data2->login << std::endl;
+    // std::cout << "data " << data.level << " data2: " << data2->level << std::endl;
+    // data2 = s.deserialize(s.serialize(&data));
+    // std::cout << std::endl << "after serialized: " << std::endl;
+    // std::cout << "data: " << &data << " data2: " << data2 << std::endl;
+    // std::cout << "data: " << data.login << " data2: " << data2->login << std::endl;
+    // std::cout << "data: " << data.level << " data2: " << data2->level << std::endl;
 
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
-    t_data *data3 = new Data;
-    data3 = s.deserialize(s.serialize(data2));
-    std::cout << "data3: " << data3 << std::endl;
-    std::cout << "data3: " << data3->login << std::endl;
-    std::cout << "data3: " << data3->level << std::endl;
+    // t_data *data3 = new Data;
+    // data3 = s.deserialize(s.serialize(data2));
+    // std::cout << "data3: " << data3 << std::endl;
+    // std::cout << "data3: " << data3->login << std::endl;
+    // std::cout << "data3: " << data3->level << std::endl;
+
+
+    uintptr_t tmp = s.serialize(&data);
+    std::cout << "data addr: " << &data << std::endl;
+    std::cout << "tmp addr:  "  << s.deserialize(tmp) << std::endl;
 }
