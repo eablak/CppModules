@@ -13,7 +13,7 @@ template<class T>class Array{
     Array &operator=(const Array &copyA);
     ~Array();
 
-    class OutOfRange: public std::exception //public !
+    class OutOfRange: public std::exception
     {
         virtual const char* what() const throw()
         {
@@ -45,7 +45,7 @@ template<typename T>Array<T>::Array()
 template<typename T>Array<T>::Array(unsigned int n)
 {
     this->arr = new T[n];
-    this->len = n;
+    this->len = n; 
 }
 
 template<typename T>Array<T>::Array(const Array &copyA)
