@@ -1,6 +1,6 @@
 NAME = serialization
 
-SOURCES = main.cpp Base.cpp A.cpp B.cpp C.cpp funcs.c
+SOURCES = main.cpp Base.cpp A.cpp B.cpp C.cpp funcs.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
