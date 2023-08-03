@@ -100,7 +100,7 @@ void BitcoinExchange::HandleInputFile(std::string file){
     input_file.close();
 }
 
-int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it){
+int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string> >::iterator it){
 
     if (it->first.length() != 10)
         return 0;
@@ -144,18 +144,21 @@ int BitcoinExchange::CheckValidDate(std::list<std::pair<std::string, std::string
     return 0;
 }
 
-int BitcoinExchange::CheckValidValue(std::list<std::pair<std::string, std::string>>::iterator it){
-    for(char c : it->second)
-        if (!std::isdigit(c) && (c != '-' && c != '.' && c != ' '))
+int BitcoinExchange::CheckValidValue(std::list<std::pair<std::string, std::string> >::iterator it) {
+    for (std::string::const_iterator strIt = (it->second).begin(); strIt != (it->second).end(); ++strIt) {
+        char c = *strIt;
+        if (!std::isdigit(c) && (c != '-' && c != '.' && c != ' ')) {
             return 0;
+        }
+    }
     return 1;
 }
 
 void BitcoinExchange::GetExchange()
 {
-    std::list<std::pair<std::string, std::string>>::iterator it;
+    std::list<std::pair<std::string, std::string> >::iterator it;
     std::map<std::string, float>::iterator ite;
-    std::list<std::pair<std::string, std::string>>::iterator res;
+    std::list<std::pair<std::string, std::string> >::iterator res;
 
     int match = false;
     for(it = lst.begin(); it != lst.end(); it++)
@@ -186,9 +189,9 @@ void BitcoinExchange::GetExchange()
     }
 }
 
-void BitcoinExchange::FindValue(std::list<std::pair<std::string, std::string>>::iterator it)
+void BitcoinExchange::FindValue(std::list<std::pair<std::string, std::string> >::iterator it)
 {
-    auto find = map.lower_bound(it->first);
+    std::map<std::string, float>::iterator find = map.lower_bound(it->first);
     if (find->first != map.begin()->first)
         find--;
     float nbr = find->second * std::stof(it->second);
@@ -201,7 +204,7 @@ void BitcoinExchange::FindValue(std::list<std::pair<std::string, std::string>>::
 
 void BitcoinExchange::GetResult()
 {
-    std::list<std::pair<std::string, std::string>>::iterator it;
+    std::list<std::pair<std::string, std::string> >::iterator it;
 
     for(it = res.begin(); it != res.end(); it++)
         std::cout << it->first << it->second << std::endl;

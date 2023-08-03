@@ -9,15 +9,16 @@
 #include <unordered_map>
 #include <list>
 #include <limits.h>
-#include <bits/stdc++.h>
+#include <utility>
+#include <sstream>
 
 class BitcoinExchange
 {
 
     private:
     std::map<std::string, float> map;
-    std::list<std::pair<std::string, std::string>>lst;
-    std::list<std::pair<std::string, std::string>>res;
+    std::list<std::pair<std::string, std::string> >lst;
+    std::list<std::pair<std::string, std::string> >res;
 
     public:
 
@@ -31,11 +32,11 @@ class BitcoinExchange
     void HandleInputFile(std::string file);
     void GetExchange();
     void GetResult();
-    void FindValue(std::list<std::pair<std::string, std::string>>::iterator it);
-    int CheckValidDate(std::list<std::pair<std::string, std::string>>::iterator it);
-    int CheckValidValue(std::list<std::pair<std::string, std::string>>::iterator it);
+    void FindValue(std::list<std::pair<std::string, std::string> >::iterator it);
+    int CheckValidDate(std::list<std::pair<std::string, std::string> >::iterator it);
+    int CheckValidValue(std::list<std::pair<std::string, std::string> >::iterator it);
 
-    std::list<std::pair<std::string, std::string>> GetLst()
+    std::list<std::pair<std::string, std::string> > GetLst()
     {
         return this->lst;
     }
