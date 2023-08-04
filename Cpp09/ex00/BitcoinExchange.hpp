@@ -35,6 +35,7 @@ class BitcoinExchange
     void FindValue(std::list<std::pair<std::string, std::string> >::iterator it);
     int CheckValidDate(std::list<std::pair<std::string, std::string> >::iterator it);
     int CheckValidValue(std::list<std::pair<std::string, std::string> >::iterator it);
+    int CheckDateInt(std::list<std::pair<std::string, std::string> >::iterator it);
 
     std::list<std::pair<std::string, std::string> > GetLst()
     {

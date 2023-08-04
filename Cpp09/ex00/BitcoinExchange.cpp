@@ -154,6 +154,16 @@ int BitcoinExchange::CheckValidValue(std::list<std::pair<std::string, std::strin
     return 1;
 }
 
+int BitcoinExchange::CheckDateInt(std::list<std::pair<std::string, std::string> >::iterator it){
+    for (std::string::const_iterator dateIt = (it->first).begin(); dateIt != (it->first).end(); ++dateIt) {
+        char c = *dateIt;
+        if (!std::isdigit(c) && c != '-' ) {
+            return 0;
+        }
+    }
+    return 1;    
+}
+
 void BitcoinExchange::GetExchange()
 {
     std::list<std::pair<std::string, std::string> >::iterator it;
@@ -165,13 +175,13 @@ void BitcoinExchange::GetExchange()
     {
         match = false;
         if (it->first != "Error: "){
-            if (CheckValidDate(it) && CheckValidValue(it))
+            if (CheckValidDate(it) && CheckValidValue(it) && CheckDateInt(it))
             {
                 for(ite = map.begin(); ite != map.end(); ite++){
                     if (it->first == ite->first)
                     {
                         match = true;
-                        float nbr = ite->second * std::stoi(it->second);
+                        float nbr = ite->second * std::stof(it->second);
                         std::stringstream s;
                         s<<nbr;
                         std::string result = s.str();
